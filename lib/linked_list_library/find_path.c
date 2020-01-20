@@ -56,8 +56,10 @@ void check_existence(char **env, cmd_t *cmd_arg, int size2, t_list *list_env)
         if (ok == 0) {
             cmd_arg->arg[0] = test;
             execute_functions(cmd_arg, list_env);
+            return;
         }
     }
+    my_printf("command not found\n");
 }
 
 void launch_functions(char *cmd, t_list *list_env)
