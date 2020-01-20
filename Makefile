@@ -34,7 +34,7 @@ MY 		=		./lib/my/my_str_to_word_array.c	\
 				./lib/my/my_strcmp.c			\
 				./lib/my/my_strlen.c
 
-CFLAGS	=	-g3
+CFLAGS	=	-g
 
 OBJ_LIBMY 	= $(MY:.c=.o)
 

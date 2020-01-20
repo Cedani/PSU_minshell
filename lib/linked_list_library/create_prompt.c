@@ -11,17 +11,20 @@ char *rem_backn(char *buffer)
 {
     char *test = malloc(sizeof(*test) * my_strlen(buffer) - 1);
     int back_n = 0;
-    char *back = malloc(sizeof(*back));
+    char *back = malloc(sizeof(*back) * 2);
+    int i = 0;
     back[0] = '\n';
+    back[1] = '\0';
 
-    for (int i = 0; buffer[i]; i += 1)
-        if (buffer[i] == '\n')
+    for (int j = 0; buffer[j]; j += 1)
+        if (buffer[j] == '\n')
             back_n += 1;
     if (back_n == my_strlen(buffer))
         return (back);
-    for (int i = 0; buffer[i] != '\n'; i += 1) {
+    for (; buffer[i] != '\n'; i += 1) {
         test[i] = buffer[i];
     }
+    //test[i] = '\0';
     return (test);
 }
 
@@ -66,19 +69,17 @@ char **give_env(t_list *list)
         i += 1;
         tmp = tmp->next;
     }
-    list_env[i] = NULL;
     return (list_env);
 }
 
 char *give_cwd(void)
 {
-    int size = 10;
+    int size = 1;
     char *buffer = NULL;
 
     buffer = getcwd(buffer, size);
     while (!buffer) {
-        size += 10;
-        buffer = malloc(sizeof(*buffer) * size + 1);
+        size += 1;
         buffer = getcwd(buffer, size);
     }
 }

@@ -59,7 +59,7 @@ void check_existence(char **env, cmd_t *cmd_arg, int size2, t_list *list_env)
             return;
         }
     }
-    my_printf("command not found\n");
+    execute_functions(cmd_arg, list_env);
 }
 
 void launch_functions(char *cmd, t_list *list_env)

@@ -34,7 +34,6 @@ char **my_str_to_word_array(char *str, int *nb_lines)
         }
         k += 1;
     }
-    tab[i] = NULL;
     return (tab);
 }
 

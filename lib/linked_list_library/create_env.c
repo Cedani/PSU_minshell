@@ -10,13 +10,14 @@
 char *cat_path(char *var)
 {
     int i = 0;
+    int k = 0;
     char *str = NULL;
 
     for (; var[i] != 61; i += 1);
     str = malloc(sizeof(*str) * i + 1);
-    for (int k = 0; k < i; k += 1)
+    for (; k < i; k += 1)
         str[k] = var[k];
-    str[i] = '\0';
+    str[k] = '\0';
     return (str);
 }
 
