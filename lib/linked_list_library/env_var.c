@@ -10,7 +10,7 @@
 void env(char *command, t_list *list)
 {
     while (list) {
-        my_printf("%s = %s\n", list->key, list->path);
+        my_printf("%s=%s\n", list->key, list->path);
         list = list->next;
     }
 }
@@ -26,14 +26,11 @@ void set_env(char *command, t_list *list)
         my_printf("bad number of argument\n");
         return;
     }
-    while (tmp) {
-        if (my_strcmp(tmp->key, arg[1]) == 0) {
-            tmp->path = arg[2];
-            ok = 1;
-        }
+    while (tmp && my_strcmp(tmp->key, arg[1]) != 0)
         tmp = tmp->next;
-    }
-    if (ok == 0)
+    if (tmp)
+        tmp->path = arg[2];
+    else
         add_element(&list, arg[1], arg[2]);
 }
 
@@ -49,6 +46,6 @@ void unset_env(char *command, t_list *list)
         tmp = tmp->next;
     }
     i += 1;
-    if (my_strcmp(tmp->key, arg[1]) == 0)
+    if (tmp && my_strcmp(tmp->key, arg[1]) == 0)
         remove_element(&list, i);
 }

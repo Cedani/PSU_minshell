@@ -42,7 +42,7 @@ void editing_pwd(t_list **list, char *path)
     for (; tmp; tmp = tmp->next)
         if (my_strcmp(tmp->key, "PWD") == 0) {
             old = tmp->path;
-            swap(&tmp->path, path);
+            tmp->path = give_cwd();
         }
     tmp = (*list);
     for (; tmp; tmp = tmp->next)
@@ -55,19 +55,17 @@ void cd(char *command, t_list *list)
     t_list *tmp = list;
     int size = 0;
     char **arg = my_str_to_word_array(command, &size);
+    char *path = NULL;
 
     if (size == 1) {
         for (; my_strcmp(tmp->key, "HOME") != 0; tmp = tmp->next);
         chdir(tmp->path);
-        editing_pwd(&list, tmp->path);
-    }
-    if (size == 2 && my_strcmp(arg[1], "..") == 0) {
-        chdir(give_path(list));
-        editing_pwd(&list, give_path(list));
+        path = tmp->path;
+        editing_pwd(&list, path);
     }
     else if (size == 2 && my_strcmp(arg[1], "-") == 0) {
         for (; my_strcmp(tmp->key, "OLDPWD") != 0; tmp = tmp->next);
-        int i = chdir(tmp->path);
+        chdir(tmp->path);
         editing_pwd(&list, tmp->path);
     } else if (size == 2)
         cd_file(arg[1], list);

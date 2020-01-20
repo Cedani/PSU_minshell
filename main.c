@@ -9,7 +9,7 @@
 
 int main(int argc, char **argv, char **env)
 {
-    if (!env[0]) {
+    if (env[0] == NULL) {
         env = urgent_env();
     }
     t_list *list_env = envt(env);

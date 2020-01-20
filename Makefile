@@ -51,7 +51,7 @@ LIST	=		./lib/linked_list_library/liblist.a
 all:	$(OBJ_LIBMY) $(OBJ_LINK)
 	ar rc $(LIBMY) $(OBJ_LIBMY)
 	ar rc $(LIST) $(OBJ_LINK) $(OBJ_LIBMY)
-	$(CC) -o $(NAME) $(MAIN) $(LIBMY) $(LIST) libgnl.a
+	$(CC) -o $(NAME) $(MAIN) $(LIBMY) $(LIST)
 
 tests_run:
 	$(CC) -o units $(SRC) $(UNIT) --coverage -lcriterion ./lib/my/libmy.a

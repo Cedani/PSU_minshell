@@ -45,8 +45,6 @@ int cd_file(char *path, t_list *list)
     char *buffer = NULL;
     int ok = 0;
 
-    for (; my_strcmp(tmp->key, "PWD"); tmp = tmp->next);
-    path = new_pwd(path, tmp->path);
     stat(path, &stat1);
     if (!S_ISDIR(stat1.st_mode) && !S_ISLNK(stat1.st_mode)) {
         my_printf("no such file or directory\n");

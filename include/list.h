@@ -40,4 +40,5 @@ int cd_file(char *path, t_list *list);
 char **give_env(t_list *list);
 void editing_pwd(t_list **list, char *path);
 void unset_env(char *command, t_list *list);
+char *give_cwd(void);
 #endif /* !LIST */
