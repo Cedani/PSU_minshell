@@ -40,12 +40,13 @@ void minishell(t_list *env)
     if (isatty(0) == 1)
         my_printf("[%s] ", tmp->path);
     ok = getline(&buffer, &n, stdin);
-    while (buffer && my_strcmp(buffer, "exit\n") != 0 && ok != -1) {
+    while (buffer && my_strcmp(buffer, "exit") != 0 && ok != -1) {
         buffer = rem_backn(buffer);
         launch_functions(buffer, env);
         if (isatty(0) == 1)
-            my_printf("[%s]", tmp->path);
+            my_printf("[%s] ", tmp->path);
         ok = getline(&buffer, &n, stdin);
+        buffer = rem_backn(buffer);
     }
 }
 

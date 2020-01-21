@@ -40,7 +40,7 @@ void execute_functions(cmd_t *cmd_arg, t_list *list)
         execve(cmd_arg->arg[0], cmd_arg->arg, give_env(list));
         perror("execve");
     } else {
-        waitpid(i, &status, 0);
+        wait(&status);
     }
 }
 
@@ -59,7 +59,8 @@ void check_existence(char **env, cmd_t *cmd_arg, int size2, t_list *list_env)
             return;
         }
     }
-    execute_functions(cmd_arg, list_env);
+    if (ok == -1)
+        my_printf("Command not found\n");
 }
 
 void launch_functions(char *cmd, t_list *list_env)
