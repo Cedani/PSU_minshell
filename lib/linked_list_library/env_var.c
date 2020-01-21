@@ -19,17 +19,22 @@ void set_env(char *command, t_list *list)
 {
     int size = 0;
     char **arg = my_str_to_word_array(command, &size);
-    int ok = 0;
+    char *test = malloc(sizeof(*test));
     t_list *tmp = list;
 
-    if (size != 3) {
-        my_printf("bad number of argument\n");
+    if (size == 1) {
+        env(command, list);
         return;
     }
-    while (tmp && my_strcmp(tmp->key, arg[1]) != 0)
-        tmp = tmp->next;
+    if (size > 3) {
+        my_printf("too many argument\n");
+        return;
+    }
+    for (; tmp && my_strcmp(tmp->key, arg[1]) != 0; tmp = tmp->next);
     if (tmp)
         tmp->path = arg[2];
+    else if (size == 2)
+        add_element(&list, arg[1], test);
     else
         add_element(&list, arg[1], arg[2]);
 }
