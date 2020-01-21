@@ -36,17 +36,22 @@ void execute_functions(cmd_t *cmd_arg, t_list *list)
 {
     int status = 0;
     int i = fork();
+
     if (i == 0) {
         execve(cmd_arg->arg[0], cmd_arg->arg, give_env(list));
-        if (EACCES == errno)
-            my_printf("%s: Permission denied.\n", cmd_arg->arg[0]);
-        else if (ENOEXEC == errno) {
-            my_printf("%s: Exec format error. Wrong ", cmd_arg->arg[0]);
-            my_printf("Architecture\n");
-        }
-    } else {
+        // if (EACCES == errno) {
+        //     my_printf("%s: Permission denied.\n", cmd_arg->arg[0]);
+        //     exit (0);
+        // }
+        // else if (ENOEXEC == errno) {
+        //     my_printf("%s: Exec format error. Wrong ", cmd_arg->arg[0]);
+        //     my_printf("Architecture.\n");
+        //     exit (0);
+        // }
+        strerror(errno);
+        exit (0);
+    } else
         wait(&i);
-    }
 }
 
 void check_existence(char **env, cmd_t *cmd_arg, int size2, t_list *list_env)
