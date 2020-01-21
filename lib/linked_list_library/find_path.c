@@ -38,9 +38,14 @@ void execute_functions(cmd_t *cmd_arg, t_list *list)
     int i = fork();
     if (i == 0) {
         execve(cmd_arg->arg[0], cmd_arg->arg, give_env(list));
-        perror("execve");
+        if (EACCES == errno)
+            my_printf("%s: Permission denied.\n", cmd_arg->arg[0]);
+        else if (ENOEXEC == errno) {
+            my_printf("%s: Exec format error. Wrong ", cmd_arg->arg[0]);
+            my_printf("Architecture\n");
+        }
     } else {
-        wait(&status);
+        wait(&i);
     }
 }
 

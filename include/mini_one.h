@@ -11,6 +11,7 @@
 #include "my.h"
 #include "my_printf.h"
 #include "gnl.h"
+#include <errno.h>
 #include <stdio.h>
 
 #endif /* !MINISHELL1 */

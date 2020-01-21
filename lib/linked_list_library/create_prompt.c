@@ -31,9 +31,10 @@ void minishell(t_list *env)
 {
     int exit_shell = 0;
     char *buffer = NULL;
-    size_t n = 10;
+    size_t n = 0;
     t_list *tmp = env;
     int ok = 0;
+    int i = 0;
 
     for (; my_strcmp(tmp->key, "PWD") != 0; tmp = tmp->next);
     if (isatty(0) == 1)
