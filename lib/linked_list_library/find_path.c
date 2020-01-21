@@ -49,8 +49,8 @@ void execute_functions(cmd_t *cmd_arg, t_list *list)
         exit (0);
     } else
         waitpid(i, &status, 0);
-    if (__WCOREDUMP(status))
-        my_printf("Segmentation fault (core dumped)\n");
+    if (WIFSIGNALED(status))
+        my_printf("%s\n", strsignal(WTERMSIG(status)));
 }
 
 void check_existence(char **env, cmd_t *cmd_arg, int size2, t_list *list_env)
