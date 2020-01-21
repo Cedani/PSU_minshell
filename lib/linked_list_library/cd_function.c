@@ -67,6 +67,6 @@ void cd(char *command, t_list *list)
         for (; my_strcmp(tmp->key, "OLDPWD") != 0; tmp = tmp->next);
         chdir(tmp->path);
         editing_pwd(&list, tmp->path);
-    } else  
+    } else
         cd_file(arg[1], list);
 }
