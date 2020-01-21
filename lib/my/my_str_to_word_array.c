@@ -59,6 +59,8 @@ int jump_nonalpha(char str)
         return (1);
     if (str == ':')
         return (1);
+    if (str == '\t')
+        return (1);
     if (str == '\0')
         return (1);
     return (0);
