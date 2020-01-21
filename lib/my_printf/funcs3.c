@@ -22,8 +22,7 @@ int count_space(char *str, int *i)
 int count_digit(int nb)
 {
     int i = 0;
-    while (nb > 0)
-    {
+    while (nb > 0) {
         i += 1;
         nb /= 10;
     }

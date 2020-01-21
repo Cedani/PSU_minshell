@@ -49,8 +49,7 @@ void set_env(char *command, t_list *list)
         my_printf("too many argument\n");
         return;
     }
-    if (my_strisalpha(arg[1]) == 1)
-    {
+    if (my_strisalpha(arg[1]) == 1) {
         my_printf("setenv: Variable name must");
         my_printf(" contain alphanumeric characters.\n");
         return;

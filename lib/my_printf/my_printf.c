@@ -38,8 +38,7 @@ void my_printf(char *s, ...)
 {
     va_list ap;
     va_start(ap, s);
-    while (*s != '\0')
-    {
+    while (*s != '\0') {
         if (*s == '%') {
             if (for_spe(ap, s[1]) == 1)
                 s += 2;
