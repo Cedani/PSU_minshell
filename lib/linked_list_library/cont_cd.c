@@ -27,7 +27,8 @@ char *good_link(char *path, char *buffer)
     return (buffer);
 }
 
-char *new_pwd(char *path, char *pwd) {
+char *new_pwd(char *path, char *pwd)
+{
     struct stat stat1;
     char *test = my_strcat(pwd, "/");
 

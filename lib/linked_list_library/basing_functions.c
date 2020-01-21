@@ -69,19 +69,3 @@ void insert_element(t_list **list, int position, char *path, char *key)
     tmp1->next = elem;
     elem->next = tmp2;
 }
-
-char **urgent_env(void)
-{
-    char **urgent = malloc(sizeof(*urgent) * 2);
-
-    urgent[0] = malloc(sizeof(*urgent));
-    urgent[0] = my_strcat("PATH=", "/home/cedani/.local/bin:/home/cedani/bin");
-    urgent[0] = my_strcat(urgent[0], ":/usr/lib/qtchooser:");
-    urgent[0] = my_strcat(urgent[0], "/usr/share/Modules/bin");
-    urgent[0] = my_strcat(urgent[0], ":/usr/lib64/ccache:");
-    urgent[0] = my_strcat(urgent[0], "/usr/local/bin");
-    urgent[0] = my_strcat(urgent[0], ":/usr/local/sbin:");
-    urgent[0] = my_strcat(urgent[0], "/usr/bin:/usr/sbin");
-    urgent[1] = NULL;
-    return (urgent);
-}
