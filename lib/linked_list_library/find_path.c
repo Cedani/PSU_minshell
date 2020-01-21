@@ -39,19 +39,18 @@ void execute_functions(cmd_t *cmd_arg, t_list *list)
 
     if (i == 0) {
         execve(cmd_arg->arg[0], cmd_arg->arg, give_env(list));
-        // if (EACCES == errno) {
-        //     my_printf("%s: Permission denied.\n", cmd_arg->arg[0]);
-        //     exit (0);
-        // }
-        // else if (ENOEXEC == errno) {
-        //     my_printf("%s: Exec format error. Wrong ", cmd_arg->arg[0]);
-        //     my_printf("Architecture.\n");
-        //     exit (0);
-        // }
-        strerror(errno);
+        if (EACCES == errno) {
+            my_printf("%s: Permission denied.\n", cmd_arg->arg[0]);
+        }
+        else if (ENOEXEC == errno) {
+            my_printf("%s: Exec format error. Wrong ", cmd_arg->arg[0]);
+            my_printf("Architecture.\n");
+        }
         exit (0);
     } else
-        wait(&i);
+        waitpid(i, &status, 0);
+    if (__WCOREDUMP(status))
+        my_printf("Segmentation fault (core dumped)\n");
 }
 
 void check_existence(char **env, cmd_t *cmd_arg, int size2, t_list *list_env)
