@@ -59,7 +59,7 @@ void check_existence(char **env, cmd_t *cmd_arg, int size2, t_list *list_env)
             return;
         }
     }
-    if (ok == -1)
+    if (ok == -1 && my_strcmp(cmd_arg->arg[0], "\n") != 0)
         my_printf("%s: Command not found.\n", cmd_arg->arg[0]);
 }
 

@@ -47,7 +47,7 @@ int cd_file(char *path, t_list *list)
 
     stat(path, &stat1);
     if (!S_ISDIR(stat1.st_mode) && !S_ISLNK(stat1.st_mode)) {
-        my_printf("no such file or directory\n");
+        my_printf("%s: Not a directory.\n", path);
         return (0);
     }
     if (S_ISLNK(stat1.st_mode))

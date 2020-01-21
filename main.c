@@ -13,7 +13,7 @@ int main(int argc, char **argv, char **env)
         env = urgent_env();
     }
     t_list *list_env = envt(env);
-    char **test = give_env(list_env);
+    //char **test = give_env(list_env);
     minishell(list_env);
     return (0);
 }
