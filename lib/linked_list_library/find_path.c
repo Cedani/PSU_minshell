@@ -60,7 +60,7 @@ void check_existence(char **env, cmd_t *cmd_arg, int size2, t_list *list_env)
         }
     }
     if (ok == -1)
-        my_printf("Command not found\n");
+        my_printf("Command not found.\n");
 }
 
 void launch_functions(char *cmd, t_list *list_env)

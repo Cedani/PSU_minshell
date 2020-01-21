@@ -24,7 +24,6 @@ char *rem_backn(char *buffer)
     for (; buffer[i] != '\n'; i += 1) {
         test[i] = buffer[i];
     }
-    //test[i] = '\0';
     return (test);
 }
 
@@ -40,8 +39,8 @@ void minishell(t_list *env)
     if (isatty(0) == 1)
         my_printf("[%s] ", tmp->path);
     ok = getline(&buffer, &n, stdin);
+    buffer = rem_backn(buffer);
     while (buffer && my_strcmp(buffer, "exit") != 0 && ok != -1) {
-        buffer = rem_backn(buffer);
         launch_functions(buffer, env);
         if (isatty(0) == 1)
             my_printf("[%s] ", tmp->path);
