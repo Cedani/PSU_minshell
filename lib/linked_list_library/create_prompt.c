@@ -84,3 +84,12 @@ char *give_cwd(void)
         buffer = getcwd(buffer, size);
     }
 }
+
+void print_signal(int status)
+{
+    char *sig = strsignal(WTERMSIG(status));
+    if (my_strcmp(sig, "Floating point exception") == 0)
+        my_printf("Floating exception\n");
+    else
+        my_printf("%s\n", sig);
+}

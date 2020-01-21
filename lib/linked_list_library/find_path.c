@@ -50,7 +50,7 @@ void execute_functions(cmd_t *cmd_arg, t_list *list)
     } else
         waitpid(i, &status, 0);
     if (WIFSIGNALED(status))
-        my_printf("%s\n", strsignal(WTERMSIG(status)));
+        print_signal(status);
 }
 
 void check_existence(char **env, cmd_t *cmd_arg, int size2, t_list *list_env)

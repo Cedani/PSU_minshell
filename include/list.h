@@ -41,4 +41,5 @@ char **give_env(t_list *list);
 void editing_pwd(t_list **list, char *path);
 void unset_env(char *command, t_list *list);
 char *give_cwd(void);
+void print_signal(int status);
 #endif /* !LIST */
