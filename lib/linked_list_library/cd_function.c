@@ -54,8 +54,9 @@ void cd(char *command, t_list *list)
     char *path = NULL;
 
     if (size == 1) {
-        path = give_home(NULL, 0);
-        chdir(path);
+        for (; my_strcmp(tmp->key, "HOME") != 0; tmp = tmp->next);
+        chdir(tmp->path);
+        path = tmp->path;
         editing_pwd(&list, path);
     }
     else if (size == 2 && my_strcmp(arg[1], "-") == 0) {
