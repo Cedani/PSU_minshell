@@ -84,14 +84,14 @@ void launch_functions(char *cmd, t_list *list_env)
     cmd_t *cmd_arg = malloc(sizeof(*cmd_arg));
 
     cmd_arg->arg = my_str_to_word_array(cmd, &size);
+    if (check_built(cmd_arg->arg, list_env, cmd) == 1)
+        return;
     if (!path) {
         my_printf("%s: Command not found.\n", cmd_arg->arg[0]);
         return;
     }
     cmd_arg->size = size;
     cmd_arg->cmd = cmd;
-    if (check_built(cmd_arg->arg, list_env, cmd) == 1)
-        return;
     if (access(cmd_arg->arg[0], X_OK) == 0)
         execute_functions(cmd_arg, list_env);
     else
