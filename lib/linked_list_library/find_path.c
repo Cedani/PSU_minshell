@@ -17,8 +17,11 @@ static const argument_t func[] = {
 
 char *find_path(t_list *list)
 {
-    for (; my_strcmp(list->key, "PATH") != 0; list = list->next);
-    return (list->path);
+    for (;list && my_strcmp(list->key, "PATH") != 0; list = list->next);
+    if (list)
+        return (list->path);
+    else
+        return NULL;
 }
 
 int check_built(char **arg, t_list *list, char *cmd)
@@ -76,18 +79,20 @@ void launch_functions(char *cmd, t_list *list_env)
 {
     int size = 0;
     int size2 = 0;
-    int ok = 0;
     char *path = find_path(list_env);
     char **env = my_str_to_word_array(path, &size2);
     cmd_t *cmd_arg = malloc(sizeof(*cmd_arg));
 
     cmd_arg->arg = my_str_to_word_array(cmd, &size);
+    if (!path) {
+        my_printf("%s: Command not found.\n", cmd_arg->arg[0]);
+        return;
+    }
     cmd_arg->size = size;
     cmd_arg->cmd = cmd;
     if (check_built(cmd_arg->arg, list_env, cmd) == 1)
         return;
-    ok = access(cmd_arg->arg[0], X_OK);
-    if (ok == 0)
+    if (access(cmd_arg->arg[0], X_OK) == 0)
         execute_functions(cmd_arg, list_env);
     else
         check_existence(env, cmd_arg, size2, list_env);
