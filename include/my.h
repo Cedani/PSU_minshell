@@ -22,4 +22,5 @@ char *my_strcat (char *dest , char const *src);
 int alpha(char c);
 char *give_old(char *oldpwd, int todo);
 char *checker(char *buffer);
+char *give_home(char *home_list, int todo);
 #endif /* !MY */

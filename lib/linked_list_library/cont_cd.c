@@ -18,6 +18,17 @@ char *give_old(char *oldpwd, int todo)
         return (old);
 }
 
+char *give_home(char *home_list, int todo)
+{
+    static char *home = NULL;
+
+    if (todo == 1) {
+        home = home_list;
+        return (NULL);
+    } else
+        return (home);
+}
+
 char *new_pwd(char *path, char *pwd)
 {
     struct stat stat1;
