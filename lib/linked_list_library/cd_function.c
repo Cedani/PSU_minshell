@@ -41,13 +41,9 @@ void editing_pwd(t_list **list, char *path)
     tmp = (*list);
     for (; tmp; tmp = tmp->next)
         if (my_strcmp(tmp->key, "PWD") == 0) {
-            old = tmp->path;
+            give_old(tmp->path, 1);
             tmp->path = give_cwd();
         }
-    tmp = (*list);
-    for (; tmp; tmp = tmp->next)
-        if (my_strcmp(tmp->key, "OLDPWD") == 0)
-            swap(&tmp->path, old);
 }
 
 void cd(char *command, t_list *list)
@@ -64,9 +60,9 @@ void cd(char *command, t_list *list)
         editing_pwd(&list, path);
     }
     else if (size == 2 && my_strcmp(arg[1], "-") == 0) {
-        for (; my_strcmp(tmp->key, "OLDPWD") != 0; tmp = tmp->next);
-        chdir(tmp->path);
-        editing_pwd(&list, tmp->path);
+        path = give_old(NULL, 0);
+        chdir(path);
+        editing_pwd(&list, path);
     } else
         cd_file(arg[1], list);
 }

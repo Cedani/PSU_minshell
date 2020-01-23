@@ -47,6 +47,13 @@ char *give_value_path(char *path)
     return (value_path);
 }
 
+void set_old(t_list *list)
+{
+    for (; my_strcmp(list->key, "OLDPWD") != 0; list = list->next);
+    if (list)
+        give_old(list->path, 1);
+}
+
 t_list *envt(char **env)
 {
     t_list *list_env = NULL;
@@ -58,5 +65,6 @@ t_list *envt(char **env)
         value = give_value_path(env[i]);
         add_element(&list_env, key, value);
     }
+    set_old(list_env);
     return (list_env);
 }

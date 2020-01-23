@@ -16,6 +16,7 @@ char *rem_backn(char *buffer)
     back[0] = '\n';
     back[1] = '\0';
 
+    buffer = checker(buffer);
     for (int j = 0; buffer[j]; j += 1)
         if (buffer[j] == '\n')
             back_n += 1;
@@ -29,7 +30,6 @@ char *rem_backn(char *buffer)
 
 void minishell(t_list *env)
 {
-    int exit_shell = 0;
     char *buffer = NULL;
     size_t n = 0;
     t_list *tmp = env;

@@ -20,4 +20,6 @@ int my_strlen(char const *str);
 int my_strcmp(char const *s1, char const *s2);
 char *my_strcat (char *dest , char const *src);
 int alpha(char c);
+char *give_old(char *oldpwd, int todo);
+char *checker(char *buffer);
 #endif /* !MY */

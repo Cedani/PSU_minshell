@@ -7,24 +7,15 @@
 
 #include "../../include/mini_one.h"
 
-char *good_link(char *path, char *buffer)
+char *give_old(char *oldpwd, int todo)
 {
-    struct stat stat1;
-    int size = 50;
-    int ok = 0;
+    static char *old = NULL;
 
-    buffer = malloc(sizeof(char) * size +1);
-    if (S_ISLNK(stat1.st_mode)) {
-        readlink(path, buffer, size);
-        ok = stat(buffer, &stat1);
-        while (ok != 0) {
-            size += 10;
-            buffer = malloc(sizeof(char) * size +1);
-            readlink(path, buffer, size);
-            ok = stat(buffer, &stat1);
-        }
-    }
-    return (buffer);
+    if (todo == 1) {
+        old = oldpwd;
+        return NULL;
+    } else
+        return (old);
 }
 
 char *new_pwd(char *path, char *pwd)
@@ -51,8 +42,6 @@ int cd_file(char *path, t_list *list)
         my_printf("%s: Not a directory.\n", path);
         return (0);
     }
-    if (S_ISLNK(stat1.st_mode))
-        path = good_link(path, buffer);
     chdir(path);
     editing_pwd(&list, path);
 }

@@ -69,3 +69,16 @@ void insert_element(t_list **list, int position, char *path, char *key)
     tmp1->next = elem;
     elem->next = tmp2;
 }
+
+char *checker(char *buffer)
+{
+    int ok = 0;
+
+    for (int i = 0; ok == 0 && buffer[i]; i += 1)
+        if (buffer[i] != ' ' && buffer[i] != '\n')
+            ok = 1;
+    if (ok ==  0)
+        return ("\n");
+    else
+        return (buffer);
+}
