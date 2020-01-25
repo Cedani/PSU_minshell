@@ -33,7 +33,7 @@ void remove_element(t_list **list, int position)
 
     if (position == 1) {
         tmp1 = (*list);
-        *list = (*list)->next;
+        (*list) = (*list)->next;
         free(tmp1);
         return;
     }
@@ -73,12 +73,15 @@ void insert_element(t_list **list, int position, char *path, char *key)
 char *checker(char *buffer)
 {
     int ok = 0;
+    char *ret = malloc(sizeof(*buffer) * 2);
 
+    ret[0] = '\n';
+    ret[1] = '\0';
     for (int i = 0; ok == 0 && buffer[i]; i += 1)
         if (buffer[i] != ' ' && buffer[i] != '\n')
             ok = 1;
     if (ok ==  0)
-        return ("\n");
+        return (ret);
     else
         return (buffer);
 }

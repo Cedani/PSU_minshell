@@ -9,6 +9,7 @@
 
 void env(char *command, t_list *list)
 {
+    my_printf("done\n");
     while (list) {
         my_printf("%s=%s\n", list->key, list->path);
         list = list->next;
@@ -70,6 +71,8 @@ void unset_env(char *command, t_list *list)
         tmp = tmp->next;
     }
     i += 1;
-    if (tmp && my_strcmp(tmp->key, arg[1]) == 0)
+    if (tmp && my_strcmp(tmp->key, arg[1]) == 0) {
+        my_printf("i = %d\n", i);
         remove_element(&list, i);
+    }
 }

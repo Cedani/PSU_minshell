@@ -50,12 +50,17 @@ char *give_value_path(char *path)
 void set_old(t_list *list)
 {
     t_list *tmp = list;
+    char *cwd;
 
-    for (; my_strcmp(tmp->key, "OLDPWD") != 0; tmp = tmp->next);
+    for (;tmp && my_strcmp(tmp->key, "OLDPWD") != 0; tmp = tmp->next);
     if (tmp)
         give_old(tmp->path, 1);
+    else {
+        cwd = give_cwd();
+        give_old(cwd, 1);
+    }
     tmp = list;
-    for (; my_strcmp(tmp->key, "HOME") != 0; tmp = tmp->next);
+    for (;tmp && my_strcmp(tmp->key, "HOME") != 0; tmp = tmp->next);
     if (tmp)
         give_home(tmp->path, 1);
 }
@@ -66,11 +71,13 @@ t_list *envt(char **env)
     char *key = NULL;
     char *value = NULL;
 
+    set_old(list_env);
+    if (!env[0])
+        return list_env;
     for (int i = 0; env[i]; i += 1) {
         key = cat_path(env[i]);
         value = give_value_path(env[i]);
         add_element(&list_env, key, value);
     }
-    set_old(list_env);
     return (list_env);
 }

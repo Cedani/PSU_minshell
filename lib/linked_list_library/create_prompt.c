@@ -9,7 +9,8 @@
 
 char *rem_backn(char *buffer)
 {
-    char *test = malloc(sizeof(*test) * my_strlen(buffer) - 1);
+    int j = my_strlen(buffer);
+    char *test = malloc(sizeof(char) * j);
     int back_n = 0;
     char *back = malloc(sizeof(*back) * 2);
     int i = 0;
@@ -22,29 +23,28 @@ char *rem_backn(char *buffer)
             back_n += 1;
     if (back_n == my_strlen(buffer))
         return (back);
-    for (; buffer[i] != '\n'; i += 1) {
+    for (; buffer[i] != '\n'; i += 1)
         test[i] = buffer[i];
-    }
+    test[i] = '\0';
     return (test);
 }
 
-void minishell(t_list *env)
+void minishell(t_list *env_t)
 {
     char *buffer = NULL;
     size_t n = 0;
-    t_list *tmp = env;
+    t_list *tmp = env_t;
     int ok = 0;
     int i = 0;
 
-    for (; my_strcmp(tmp->key, "PWD") != 0; tmp = tmp->next);
     if (isatty(0) == 1)
-        my_printf("[%s] ", tmp->path);
+        my_printf("[%s] ", give_cwd());
     ok = getline(&buffer, &n, stdin);
     buffer = rem_backn(buffer);
     while (buffer && my_strcmp(buffer, "exit") != 0 && ok != -1) {
-        launch_functions(buffer, env);
+        launch_functions(buffer, env_t);
         if (isatty(0) == 1)
-            my_printf("[%s] ", tmp->path);
+            my_printf("[%s] ", give_cwd());
         ok = getline(&buffer, &n, stdin);
         buffer = rem_backn(buffer);
     }
@@ -83,6 +83,7 @@ char *give_cwd(void)
         size += 1;
         buffer = getcwd(buffer, size);
     }
+    return (buffer);
 }
 
 void print_signal(int status)
