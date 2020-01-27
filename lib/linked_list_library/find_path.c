@@ -42,9 +42,8 @@ void execute_functions(cmd_t *cmd_arg, t_list *list)
 
     if (i == 0) {
         execve(cmd_arg->arg[0], cmd_arg->arg, give_env(list));
-        if (EACCES == errno) {
+        if (EACCES == errno)
             my_printf("%s: Permission denied.\n", cmd_arg->arg[0]);
-        }
         else if (ENOEXEC == errno) {
             my_printf("%s: Exec format error. Wrong ", cmd_arg->arg[0]);
             my_printf("Architecture.\n");
@@ -80,7 +79,7 @@ void launch_functions(char *cmd, t_list *list_env)
     int size = 0;
     int size2 = 0;
     char *path = find_path(list_env);
-    char **env = my_str_to_word_array(path, &size2);
+    char **env = NULL;
     cmd_t *cmd_arg = malloc(sizeof(*cmd_arg));
 
     cmd_arg->arg = my_str_to_word_array(cmd, &size);
@@ -89,7 +88,8 @@ void launch_functions(char *cmd, t_list *list_env)
     if (!path) {
         my_printf("%s: Command not found.\n", cmd_arg->arg[0]);
         return;
-    }
+    } else
+        env = my_str_to_word_array(path, &size2);
     cmd_arg->size = size;
     cmd_arg->cmd = cmd;
     if (access(cmd_arg->arg[0], X_OK) == 0)

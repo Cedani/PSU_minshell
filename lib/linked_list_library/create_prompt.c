@@ -57,6 +57,8 @@ char **give_env(t_list *list)
     char **list_env = NULL;
     int i = 0;
 
+    if (!list)
+        return NULL;
     while (tmp) {
         size += 1;
         tmp = tmp->next;

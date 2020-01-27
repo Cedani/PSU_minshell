@@ -23,8 +23,6 @@ char **my_str_to_word_array(char *str, int *nb_lines)
     int size = 0;
     int m = my_strlen(str);
 
-    if (!str)
-        return NULL;
     *nb_lines = biglen(str);
     tab = malloc((sizeof(char *)) * (*nb_lines));
     while (k < m) {
@@ -36,6 +34,7 @@ char **my_str_to_word_array(char *str, int *nb_lines)
         }
         k += 1;
     }
+    tab[*nb_lines] = NULL;
     return (tab);
 }
 
