@@ -72,7 +72,6 @@ void unset_env(char *command, t_list *list)
     }
     i += 1;
     if (tmp && my_strcmp(tmp->key, arg[1]) == 0) {
-        my_printf("i = %d\n", i);
         remove_element(&list, i);
     }
 }

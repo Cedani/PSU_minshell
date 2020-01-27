@@ -17,8 +17,6 @@ static const argument_t func[] = {
 
 char *find_path(t_list *list)
 {
-    if (list)
-        my_printf("[%s]\n", list->path);
     for (;list && my_strcmp(list->key, "PATH") != 0; list = list->next);
     if (list)
         return (list->path);
@@ -82,7 +80,6 @@ void launch_functions(char *cmd, t_list *list_env)
     int size = 0;
     int size2 = 0;
     char *path = find_path(list_env);
-    my_printf("done\n");
     char **env = my_str_to_word_array(path, &size2);
     cmd_t *cmd_arg = malloc(sizeof(*cmd_arg));
 
