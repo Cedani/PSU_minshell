@@ -71,7 +71,6 @@ t_list *envt(char **env)
     char *key = NULL;
     char *value = NULL;
 
-    set_old(list_env);
     if (!env[0])
         return list_env;
     for (int i = 0; env[i]; i += 1) {
@@ -79,5 +78,6 @@ t_list *envt(char **env)
         value = give_value_path(env[i]);
         add_element(&list_env, key, value);
     }
+    set_old(list_env);
     return (list_env);
 }

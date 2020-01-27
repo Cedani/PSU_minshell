@@ -55,6 +55,10 @@ void cd(char *command, t_list *list)
 
     if (size == 1) {
         path = give_home(NULL, 0);
+        if (!path) {
+            my_printf("%s: No home directory.\n", command);
+            return;
+        }
         chdir(path);
         editing_pwd(&list, path);
     }
