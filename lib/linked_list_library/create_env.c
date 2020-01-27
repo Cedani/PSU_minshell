@@ -53,8 +53,10 @@ void set_old(t_list *list)
     char *cwd;
 
     for (;tmp && my_strcmp(tmp->key, "OLDPWD") != 0; tmp = tmp->next);
-    if (tmp)
+    if (tmp) {
         give_old(tmp->path, 1);
+        my_printf("done\n");
+    }
     else {
         cwd = give_cwd();
         give_old(cwd, 1);
@@ -71,13 +73,14 @@ t_list *envt(char **env)
     char *key = NULL;
     char *value = NULL;
 
-    if (!env[0])
+    if (!env[0]) {
+        set_old(list_env);
         return list_env;
+    }
     for (int i = 0; env[i]; i += 1) {
         key = cat_path(env[i]);
         value = give_value_path(env[i]);
         add_element(&list_env, key, value);
     }
-    set_old(list_env);
     return (list_env);
 }
