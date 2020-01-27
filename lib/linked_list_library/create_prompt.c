@@ -93,6 +93,8 @@ void print_signal(int status)
     char *sig = strsignal(WTERMSIG(status));
     if (my_strcmp(sig, "Floating point exception") == 0)
         my_printf("Floating exception\n");
+    else if (__WCOREDUMP(status))
+        my_printf("Segmentation fault (core dumped)\n", sig);
     else
         my_printf("%s\n", sig);
 }
