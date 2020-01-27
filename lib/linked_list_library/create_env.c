@@ -82,5 +82,6 @@ t_list *envt(char **env)
         value = give_value_path(env[i]);
         add_element(&list_env, key, value);
     }
+    set_old(list_env);
     return (list_env);
 }
