@@ -53,10 +53,8 @@ void set_old(t_list *list)
     char *cwd;
 
     for (;tmp && my_strcmp(tmp->key, "OLDPWD") != 0; tmp = tmp->next);
-    if (tmp) {
+    if (tmp)
         give_old(tmp->path, 1);
-        my_printf("done\n");
-    }
     else {
         cwd = give_cwd();
         give_old(cwd, 1);
